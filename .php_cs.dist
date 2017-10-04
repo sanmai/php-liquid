@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Liquid package.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ * @package Liquid
+ */
+
 $header = <<<'EOF'
 This file is part of the Liquid package.
 
@@ -22,6 +31,15 @@ return PhpCsFixer\Config::create()
 		'semicolon_after_instruction' => true,
 		'whitespace_after_comma_in_array' => true,
 		'header_comment' => ['header' => $header],
+
+		'@Symfony' => true,
+		'single_quote' => false,
+		'yoda_style' => null,
+		'concat_space' => ['spacing' => 'one'],
+		'phpdoc_summary' => false,
+		'phpdoc_align' => false,
+		'self_accessor' => false,
+		'cast_spaces' => false,
 	])
 	->setIndent("\t")
 	->setFinder(
