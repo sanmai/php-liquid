@@ -18,14 +18,14 @@ class TemplateTest extends TestCase
 	/** @var string full path to cache dir  */
 	protected $cacheDir;
 
-	protected function setUp()
+	protected function setUp(): void
 	{
 		parent::setUp();
 
 		$this->cacheDir = __DIR__ . DIRECTORY_SEPARATOR . self::CACHE_DIR;
 	}
 
-	protected function tearDown()
+	protected function tearDown(): void
 	{
 		parent::tearDown();
 

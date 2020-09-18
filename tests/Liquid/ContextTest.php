@@ -162,7 +162,7 @@ class ContextTest extends TestCase
 	/** @var Context */
 	public $context;
 
-	public function setup()
+	public function setup(): void
 	{
 		parent::setUp();
 

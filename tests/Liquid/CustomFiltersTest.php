@@ -20,7 +20,7 @@ class CustomFiltersTest extends TestCase
 	 */
 	public $context;
 
-	protected function setup()
+	protected function setup(): void
 	{
 		parent::setUp();
 

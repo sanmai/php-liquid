@@ -68,7 +68,7 @@ class OutputTest extends TestCase
 {
 	protected $assigns = array();
 
-	protected function setup()
+	protected function setup(): void
 	{
 		parent::setUp();
 

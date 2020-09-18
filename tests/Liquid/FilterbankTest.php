@@ -73,7 +73,7 @@ class FilterbankTest extends TestCase
 	/** @var Context */
 	private $context;
 
-	protected function setup()
+	protected function setup(): void
 	{
 		parent::setUp();
 
@@ -81,7 +81,7 @@ class FilterbankTest extends TestCase
 		$this->filterBank = new FilterBank($this->context);
 	}
 
-	protected function tearDown()
+	protected function tearDown(): void
 	{
 		// have to destroy these else PHP goes nuts
 		unset($this->context);

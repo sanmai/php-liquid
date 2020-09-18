@@ -62,7 +62,7 @@ class StandardFiltersTest extends TestCase
 	 */
 	public $context;
 
-	protected function setup()
+	protected function setup(): void
 	{
 		parent::setUp();
 
@@ -578,7 +578,7 @@ class StandardFiltersTest extends TestCase
 		// check that our workaround for 'default' works as it should
 		$this->assertTemplateResult('something', '{{ nothing | default: "something" }}');
 	}
-	
+
 	public function testUnique()
 	{
 		$data = array(

@@ -17,7 +17,7 @@ class LocalFileSystemTest extends TestCase
 {
 	protected $root;
 
-	protected function setUp()
+	protected function setUp(): void
 	{
 		$this->root = __DIR__ . DIRECTORY_SEPARATOR . self::TEMPLATES_DIR . DIRECTORY_SEPARATOR;
 		// reset to defaults
