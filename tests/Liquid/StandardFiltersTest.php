@@ -527,26 +527,26 @@ class StandardFiltersTest extends TestCase
 			),
 		);
 
-		foreach ($data as $item) {
-			$this->assertEquals($item[1], StandardFilters::sort($item[0]), '', 0, 10, true);
+		foreach ($data as $key => $item) {
+			$this->assertEquals(array_values($item[1]), array_values(StandardFilters::sort($item[0])), "Sort failed for case #{$key}");
 		}
 
 		// Sort by inner key
 		$original = array(
 			array('a' => 20, 'b' => 10),
 			array('a' => 45, 'b' => 5),
-			array('a' => 40, 'b' => 5),
+			array('a' => 40, 'b' => 6),
 			array('a' => 30, 'b' => 48),
 		);
 		$expected = array(
 			array('a' => 45, 'b' => 5),
-			array('a' => 40, 'b' => 5),
+			array('a' => 40, 'b' => 6),
 			array('a' => 20, 'b' => 10),
 			array('a' => 30, 'b' => 48),
 		);
 
-		$this->assertEquals($expected, StandardFilters::sort($original, 'b'), '', 0, 10, true);
-		$this->assertEquals($expected, StandardFilters::sort(new \ArrayIterator($original), 'b'), '', 0, 10, true);
+		$this->assertEquals($expected, array_values(StandardFilters::sort($original, 'b')));
+		$this->assertEquals($expected, array_values(StandardFilters::sort(new \ArrayIterator($original), 'b')));
 	}
 
 	/*
@@ -601,7 +601,7 @@ class StandardFiltersTest extends TestCase
 		);
 
 		foreach ($data as $item) {
-			$this->assertEquals($item[1], StandardFilters::uniq($item[0]), '', 0, 10, true);
+			$this->assertEquals($item[1], array_values(StandardFilters::uniq($item[0])));
 		}
 	}
 
