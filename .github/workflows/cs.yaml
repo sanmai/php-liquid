@@ -33,5 +33,5 @@ jobs:
 
       - name: Check code style
         run: |
-          php vendor/bin/php-cs-fixer --cache-file=build/cache/.php_cs.cache --diff --dry-run --stop-on-violation --verbose fix
+          php vendor/bin/php-cs-fixer --using-cache=no --diff --dry-run --stop-on-violation --verbose fix
           
