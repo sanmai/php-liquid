@@ -62,7 +62,7 @@ class StandardFiltersTest extends TestCase
 	 */
 	public $context;
 
-	protected function setup(): void
+	protected function setUp(): void
 	{
 		parent::setUp();
 
@@ -85,11 +85,12 @@ class StandardFiltersTest extends TestCase
 	}
 
 	/**
-	 * @expectedException \Liquid\LiquidException
-	 * @expectedExceptionMessage cannot be estimated
 	 */
 	public function testSizeObject()
 	{
+		$this->expectException(\Liquid\LiquidException::class);
+		$this->expectExceptionMessage('cannot be estimated');
+
 		StandardFilters::size((object) array());
 	}
 

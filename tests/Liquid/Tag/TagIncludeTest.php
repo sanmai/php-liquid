@@ -40,22 +40,24 @@ class TagIncludeTest extends TestCase
 	}
 
 	/**
-	 * @expectedException \Liquid\Exception\ParseException
-	 * @expectedExceptionMessage Error in tag
 	 */
 	public function testInvalidSyntaxNoTemplateName()
 	{
+		$this->expectException(\Liquid\Exception\ParseException::class);
+		$this->expectExceptionMessage('Error in tag');
+
 		$template = new Template();
 		$template->setFileSystem($this->fs);
 		$template->parse("{% include %}");
 	}
 
 	/**
-	 * @expectedException \Liquid\Exception\MissingFilesystemException
-	 * @expectedExceptionMessage No file system
 	 */
 	public function testMissingFilesystem()
 	{
+		$this->expectException(\Liquid\Exception\MissingFilesystemException::class);
+		$this->expectExceptionMessage('No file system');
+
 		$template = new Template();
 		$template->parse("{% include 'hello' %}");
 	}
@@ -143,11 +145,12 @@ class TagIncludeTest extends TestCase
 	}
 
 	/**
-	 * @expectedException \Liquid\Exception\RenderException
-	 * @expectedExceptionMessage Use index operator
 	 */
 	public function testIncludePassArrayWithoutIndex()
 	{
+		$this->expectException(\Liquid\Exception\RenderException::class);
+		$this->expectExceptionMessage('Use index operator');
+
 		$template = new Template();
 		$template->setFileSystem(TestFileSystem::fromArray(array(
 			'inner' => "[{{ other }}]",

@@ -20,11 +20,12 @@ class TagFoo extends TagComment
 class CustomTagTest extends TestCase
 {
 	/**
-	 * @expectedException \Liquid\Exception\ParseException
-	 * @expectedExceptionMessage Unknown tag foo
 	 */
 	public function testUnknownTag()
 	{
+		$this->expectException(\Liquid\Exception\ParseException::class);
+		$this->expectExceptionMessage('Unknown tag foo');
+
 		$template = new Template();
 		$template->parse('[ba{% foo %} Comment {% endfoo %}r]');
 	}

@@ -27,7 +27,7 @@ class TagPaginateTest extends TestCase
 		self::$contextKeyDefault = Liquid::get('PAGINATION_CONTEXT_KEY');
 	}
 
-	public function tearDown(): void
+	protected function tearDown(): void
 	{
 		// reset to the defaults after each test
 		Liquid::set('PAGINATION_REQUEST_KEY', self::$requestKeyDefault);
@@ -56,19 +56,21 @@ class TagPaginateTest extends TestCase
 	}
 
 	/**
-	 * @expectedException \Liquid\Exception\ParseException
 	 */
 	public function testSyntaxErrorCase()
 	{
+		$this->expectException(\Liquid\Exception\ParseException::class);
+
 		$this->assertTemplateResult('', '{% paginate products %}{% endpaginate %}');
 	}
 
 	/**
-	 * @expectedException \Liquid\Exception\RenderException
-	 * @expectedExceptionMessage Missing collection
 	 */
 	public function testNoCollection()
 	{
+		$this->expectException(\Liquid\Exception\RenderException::class);
+		$this->expectExceptionMessage('Missing collection');
+
 		$this->assertTemplateResult('', '{% paginate products by 1 %}{% for product in products %}{{ product.id }}{% endfor %}{% endpaginate %}');
 	}
 

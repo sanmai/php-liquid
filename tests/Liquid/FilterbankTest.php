@@ -73,7 +73,7 @@ class FilterbankTest extends TestCase
 	/** @var Context */
 	private $context;
 
-	protected function setup(): void
+	protected function setUp(): void
 	{
 		parent::setUp();
 
@@ -89,18 +89,20 @@ class FilterbankTest extends TestCase
 	}
 
 	/**
-	 * @expectedException \Liquid\Exception\WrongArgumentException
 	 */
 	public function testAddFilterNotObjectAndString()
 	{
+		$this->expectException(\Liquid\Exception\WrongArgumentException::class);
+
 		$this->filterBank->addFilter(array());
 	}
 
 	/**
-	 * @expectedException \Liquid\Exception\WrongArgumentException
 	 */
 	public function testAddFilterNoFunctionOrClass()
 	{
+		$this->expectException(\Liquid\Exception\WrongArgumentException::class);
+
 		$this->filterBank->addFilter('no_such_function_or_class');
 	}
 

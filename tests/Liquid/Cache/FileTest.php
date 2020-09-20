@@ -40,18 +40,20 @@ class FileTest extends TestCase
 	}
 
 	/**
-	 * @expectedException \Liquid\Exception\FilesystemException
 	 */
 	public function testConstructInvalidOptions()
 	{
+		$this->expectException(\Liquid\Exception\FilesystemException::class);
+
 		new File();
 	}
 
 	/**
-	 * @expectedException \Liquid\Exception\FilesystemException
 	 */
 	public function testConstructNoSuchDirOrNotWritable()
 	{
+		$this->expectException(\Liquid\Exception\FilesystemException::class);
+
 		new File(array('cache_dir' => '/no/such/dir/liquid/cache'));
 	}
 

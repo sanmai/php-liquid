@@ -119,7 +119,7 @@ class EscapeByDefaultTest extends TestCase
 		self::$escapeDefault = Liquid::get('ESCAPE_BY_DEFAULT');
 	}
 
-	public function tearDown(): void
+	protected function tearDown(): void
 	{
 		// reset to the default after each test
 		Liquid::set('ESCAPE_BY_DEFAULT', self::$escapeDefault);
