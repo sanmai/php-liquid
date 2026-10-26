@@ -11,7 +11,11 @@
 
 namespace Liquid;
 
+use DateTimeInterface;
 use Liquid\Exception\RenderException;
+use function is_numeric;
+use function sprintf;
+use function strval;
 
 /**
  * A selection of standard filters.
@@ -65,23 +69,18 @@ class StandardFilters
 	 *
 	 * @param mixed $input
 	 * @param string $strftimeFormat (see http://strftime.net)
+	 * @param string|null $timezone (see https://www.php.net/manual/en/timezones.php), defaults to the default timezone
 	 *
 	 * @return string
 	 */
-	public static function date($input, $strftimeFormat = '%A, %B %e, %Y at %l:%S %P %z')
+	public static function date($input, $strftimeFormat = '%A, %B %e, %Y at %l:%S %P %z', ?string $timezone = null)
 	{
 		if (!$strftimeFormat) {
 			return $input;
 		}
 
-		if (is_numeric($input)) {
-			$input = date('Y-m-d H:i:s', $input);
-		}
-
-		$dateTime = new \DateTime($input);
-		if (!$dateTime) {
-			return "";
-		}
+		$timezone ??= date_default_timezone_get();
+		$dateTimeZone = new \DateTimeZone($timezone);
 
 		$dateFormat = str_replace(
 			['at', '%a', '%A', '%d', '%e', '%u', '%w', '%W', '%b', '%h', '%B', '%m', '%y', '%Y', '%D', '%F', '%x', '%n', '%t', '%H', '%k', '%I', '%l', '%M', '%p', '%P', '%r', '%R', '%S', '%T', '%X', '%z', '%Z', '%c', '%s', '%%'],
@@ -89,11 +88,21 @@ class StandardFilters
 			$strftimeFormat
 		);
 
-		$formatted = $dateTime->format($dateFormat);
+		$formatted = self::dateStringToDateTime($input, $dateTimeZone)->format($dateFormat);
 
 		return $formatted;
 	}
 
+	private static function dateStringToDateTime(string $input, \DateTimeZone $dateTimeZone): DateTimeInterface
+	{
+		if (!is_numeric($input)) {
+			return new \DateTimeImmutable($input, $dateTimeZone);
+		}
+
+		$dateTime = new \DateTimeImmutable(sprintf('@%d', $input));
+
+		return $dateTime->setTimezone($dateTimeZone);
+	}
 
 	/**
 	 * Default
